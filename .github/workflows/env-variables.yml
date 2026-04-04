@@ -5,6 +5,7 @@ env:
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     env:
       APP_NAME: hiroko-web-app # available to all steps in this job
     steps:
