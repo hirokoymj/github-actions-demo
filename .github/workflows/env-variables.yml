@@ -1,0 +1,9 @@
+env:
+  NODE_ENV: production # available to all jobs
+
+jobs:
+  build:
+    env:
+      APP_NAME: hiroko-web-app # available to all steps in this job
+    steps:
+      - run: echo "Running $APP_NAME in $NODE_ENV"
