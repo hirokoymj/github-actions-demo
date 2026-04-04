@@ -1,0 +1,15 @@
+name: Conditional Steps
+
+on: workflow_dispatch
+
+jobs:
+  check-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run on main only
+        run: echo "This is the main branch!"
+        if: github.ref == 'refs/heads/main'
+
+      - name: Run on any other branch
+        run: echo "This is NOT the main branch!"
+        if: github.ref != 'refs/heads/main'
