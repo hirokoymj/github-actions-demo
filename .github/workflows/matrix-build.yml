@@ -1,0 +1,36 @@
+name: Step 5 - Matrix Builds
+
+on:
+  workflow_dispatch: # run manually from GitHub UI
+
+jobs:
+  build:
+    # matrix.node-version and matrix.os are injected by the strategy below
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [18, 20, 22]
+        # GitHub will create 6 parallel jobs (2 OS × 3 Node versions):
+        #   ubuntu  + Node 18
+        #   ubuntu  + Node 20
+        #   ubuntu  + Node 22
+        #   windows + Node 18
+        #   windows + Node 20
+        #   windows + Node 22
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Show environment info
+        run: |
+          echo "OS      : ${{ matrix.os }}"
+          echo "Node    : ${{ matrix.node-version }}"
+          node --version
