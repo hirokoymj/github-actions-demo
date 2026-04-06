@@ -1,8 +1,11 @@
+name: Env Variables
+on: workflow_dispatch
 env:
   NODE_ENV: production # available to all jobs
 
 jobs:
   build:
+    runs-on: ubuntu-latest
     env:
       APP_NAME: hiroko-web-app # available to all steps in this job
     steps:
