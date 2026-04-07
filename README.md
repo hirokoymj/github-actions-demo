@@ -1,9 +1,44 @@
-# Github Action Demo
+# Github Actions Study Note
 
-✅ Step 1 — Environment Variables (env-variables.yml)
-✅ Step 2 — Multiple Jobs with needs: (multi-jobs.yml)
-✅ Step 3 — Conditional Steps with if: (conditional-steps.yml)
-✅ Step 4 — Marketplace Actions (setup-node.yml)
+### 1 — Environment Variables (env-variables.yml)
+
+### 2 — Multiple Jobs with needs: (multi-jobs.yml)
+
+### 3 — Conditional Steps with if: (conditional-steps.yml)
+
+### 4 — Marketplace Actions (setup-node.yml)
+
+---
+
+YouTube
+
+### 03-core-features--02-step-types.yaml
+
+- https://youtu.be/Xwpi0ITkL3U?t=1648
+- 1- Bash script
+- 2-Python script
+- 3-JavaScript script
+
+![](./images/steps-actions-shell.png)
+
+---
+
+#### 04
+
+
+
+---
+
+### 03-core-features--05-environment-variables.yaml
+
+- https://youtu.be/Xwpi0ITkL3U?t=2193
+- Workflow var: available in any of other different steps.
+- Job var: available only in Job1.
+- Step var: only available in Job1 and Step1.
+
+![](./images/env-scope.png)
+
+---
 
 ## GitHub Marketplace
 
@@ -65,8 +100,8 @@ curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/your_table_name?select=id&limit
 -H "Authorization: Bearer ${{ secrets.SUPABASE_KEY }}"
 ```
 
-
 ## Review - YouTube
+
 ## Runner Types (4/5)
 
 - GitHub hosted
