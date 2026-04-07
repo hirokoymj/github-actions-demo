@@ -1,0 +1,23 @@
+name: GITHUB_OUTPUT example
+on: workflow_dispatch
+
+jobs:
+  producer:
+    runs-on: ubuntu-latest
+    outputs:
+      message: ${{ steps.set-message.outputs.message }}
+
+    steps:
+      - name: Set output
+        id: set-message
+        run: |
+          echo "message=Hello from producer" >> $GITHUB_OUTPUT
+
+  consumer:
+    runs-on: ubuntu-latest
+    needs: producer
+
+    steps:
+      - name: Read output
+        run: |
+          echo "${{ needs.producer.outputs.message }}"
