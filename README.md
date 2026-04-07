@@ -50,7 +50,7 @@ What will this print?
 | Usage   | `$MY_VAR`             | `${{ needs.job.outputs.x }}` |
 | Set by  | `echo >> $GITHUB_ENV` | `echo >> $GITHUB_OUTPUT`     |
 
-### 1 — Environment Variables (env-variables.yml)
+
 
 ### 2 — Multiple Jobs with needs: (multi-jobs.yml)
 
