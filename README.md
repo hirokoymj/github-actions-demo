@@ -25,8 +25,6 @@ YouTube
 
 #### 04
 
-
-
 ---
 
 ### 03-core-features--05-environment-variables.yaml
@@ -111,3 +109,11 @@ curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/your_table_name?select=id&limit
 - https://docs.github.com/en/actions/concepts/runners/github-hosted-runners
 - ![](./RunnerTypes.png)
 - [03-core-features--02-step-types.yaml](https://github.com/hirokoymj/devops-directive-github-actions-course/blob/main/.github/workflows/03-core-features--02-step-types.yaml)
+
+#### 🔥 Compare Side-by-Side
+
+| Feature | `$GITHUB_ENV`         | `$GITHUB_OUTPUT`             |
+| ------- | --------------------- | ---------------------------- |
+| Scope   | Same job only         | Across jobs                  |
+| Usage   | `$MY_VAR`             | `${{ needs.job.outputs.x }}` |
+| Set by  | `echo >> $GITHUB_ENV` | `echo >> $GITHUB_OUTPUT`     |
