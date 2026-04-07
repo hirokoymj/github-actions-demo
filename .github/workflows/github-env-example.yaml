@@ -8,7 +8,8 @@ jobs:
       - name: Set environment variable
         run: |
           echo "MY_NAME=Hiroko" >> $GITHUB_ENV
+          echo "MY_LASTNAME=Yamaji" >> $GITHUB_ENV
 
       - name: Use environment variable
         run: |
-          echo "Hello $MY_NAME"
+          echo "Hello $MY_NAME $MY_LASTNAME"
