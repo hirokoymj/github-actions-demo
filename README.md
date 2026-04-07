@@ -1,5 +1,55 @@
 # Github Actions Study Note
 
+### Environment Variables (04/7)
+
+- [env-variables.yaml](.github/workflows/env-variables.yaml)
+- [03-core-features--05-environment-variables.yaml](.github/workflows/03-core-features--05-environment-variables.yaml)
+
+#### 🧠 One-line summary
+
+- env: → static variables (defined in YAML)
+- `$GITHUB_ENV` → dynamic variables (shared within same job)
+- `$GITHUB_OUTPUT` → data passed between jobs
+- env > `$GITHUB_OUTPUT` > `$GITHUB_ENV`, `${{ needs.job.outputs.var }}`
+
+#### Q5 (tricky 🔥)
+
+```yaml
+steps:
+  - run: |
+      echo "FOO=bar" >> $GITHUB_ENV
+      echo "$FOO"
+```
+
+What will this print?
+
+- A. bar
+- B. empty
+- C. error
+
+#### 👉 What actually happens?
+
+- echo "FOO=bar" >> $GITHUB_ENV
+  → sets variable for future steps
+- BUT **same step cannot use it yet**
+- So: echo "$FOO", 👉 prints empty, ✅ Correct answer, Q5: B (empty)
+
+---
+
+## $GITHUB_ENV vs $GITHUB_OUTPUT (04/07)
+
+- [github-env-demo.yaml](.github/workflows/github-env-demo.yaml)
+- [github-output-demo.yaml](.github/workflows/github-output-demo.yaml)
+- [03-core-features--06-passing-data.yaml](.github/workflows/03-core-features--06-passing-data.yaml)
+
+#### 🔥 Compare Side-by-Side
+
+| Feature | `$GITHUB_ENV`         | `$GITHUB_OUTPUT`             |
+| ------- | --------------------- | ---------------------------- |
+| Scope   | Same job only         | Across jobs                  |
+| Usage   | `$MY_VAR`             | `${{ needs.job.outputs.x }}` |
+| Set by  | `echo >> $GITHUB_ENV` | `echo >> $GITHUB_OUTPUT`     |
+
 ### 1 — Environment Variables (env-variables.yml)
 
 ### 2 — Multiple Jobs with needs: (multi-jobs.yml)
@@ -109,11 +159,3 @@ curl -X GET "${{ secrets.SUPABASE_URL }}/rest/v1/your_table_name?select=id&limit
 - https://docs.github.com/en/actions/concepts/runners/github-hosted-runners
 - ![](./RunnerTypes.png)
 - [03-core-features--02-step-types.yaml](https://github.com/hirokoymj/devops-directive-github-actions-course/blob/main/.github/workflows/03-core-features--02-step-types.yaml)
-
-#### 🔥 Compare Side-by-Side
-
-| Feature | `$GITHUB_ENV`         | `$GITHUB_OUTPUT`             |
-| ------- | --------------------- | ---------------------------- |
-| Scope   | Same job only         | Across jobs                  |
-| Usage   | `$MY_VAR`             | `${{ needs.job.outputs.x }}` |
-| Set by  | `echo >> $GITHUB_ENV` | `echo >> $GITHUB_OUTPUT`     |

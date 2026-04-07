@@ -16,7 +16,6 @@ jobs:
   consumer:
     runs-on: ubuntu-latest
     needs: producer
-
     steps:
       - name: Read output
         run: |
