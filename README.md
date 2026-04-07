@@ -1,6 +1,6 @@
 # Github Actions Study Note
 
-### Environment Variables (04/7)
+## Environment Variables (04/7)
 
 - [env-variables.yaml](.github/workflows/env-variables.yaml)
 - [03-core-features--05-environment-variables.yaml](.github/workflows/03-core-features--05-environment-variables.yaml)
