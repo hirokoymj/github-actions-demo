@@ -1,0 +1,14 @@
+name: GITHUB_ENV example
+on: workflow_dispatch
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variable
+        run: |
+          echo "MY_NAME=Hiroko" >> $GITHUB_ENV
+
+      - name: Use environment variable
+        run: |
+          echo "Hello $MY_NAME"
