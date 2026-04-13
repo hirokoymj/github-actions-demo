@@ -1,0 +1,19 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "description": "- [env-variables.yaml](.github/workflows/env-variables.yaml) - [03-core-features--05-environment-variables.yaml](.github/workflows/03-core-features--05-environment-variables.yaml)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirokoymj/github-actions-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hirokoymj/github-actions-demo/issues"
+  },
+  "homepage": "https://github.com/hirokoymj/github-actions-demo#readme"
+}
