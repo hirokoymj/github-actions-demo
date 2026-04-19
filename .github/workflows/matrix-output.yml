@@ -1,0 +1,12 @@
+name: Matrix value
+on: workflow_dispatch
+jobs:
+  example_matrix:
+    strategy:
+      matrix:
+        version: [10, 12]
+        os: [ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: echo "Node version is ${{ matrix.version }}"
