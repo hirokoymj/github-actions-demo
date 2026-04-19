@@ -1,0 +1,17 @@
+# Workflow-level default (applies to all jobs)
+name: Use defaults
+on: workflow_dispatch
+defaults:
+  run:
+    shell: bash
+    working-directory: ./src
+
+jobs:
+  build:
+    # Job-level default (overrides workflow-level for this job)
+    defaults:
+      run:
+        working-directory: ./packages/app
+
+    steps:
+      - run: npm install # runs in ./packages/app with bash
