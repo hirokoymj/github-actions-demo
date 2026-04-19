@@ -1,4 +1,4 @@
-name: Matrix value
+name: Matrix Value Output
 on: workflow_dispatch
 jobs:
   example_matrix:
