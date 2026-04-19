@@ -12,6 +12,5 @@ jobs:
     defaults:
       run:
         working-directory: ./packages/app
-
     steps:
       - run: npm install # runs in ./packages/app with bash
