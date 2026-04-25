@@ -1,0 +1,17 @@
+name: Test Environment Variables
+on: push
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Print production API URL
+        run: echo ${{ vars.API_URL }} # prints https://api.prod.com
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Print staging API URL
+        run: echo ${{ vars.API_URL }} # prints https://api.staging.com
