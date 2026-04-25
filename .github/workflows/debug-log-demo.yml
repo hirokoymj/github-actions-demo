@@ -1,0 +1,9 @@
+name: Debug Logging Demo
+on: push
+
+jobs:
+  debug-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print a message
+        run: echo "Hello, Debug!"
