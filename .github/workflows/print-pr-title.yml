@@ -1,0 +1,13 @@
+name: Debug Event
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print github.event
+        run: |
+          echo '${{ toJson(github.event) }}'
+          echo "${{ github.event_name }}"
+          echo "${{ github.event.pull_request.title }}"
