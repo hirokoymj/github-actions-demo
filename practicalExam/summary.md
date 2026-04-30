@@ -9,7 +9,7 @@
 - [$GITHUB_ENV](#github_env)
 - [$GITHUB_OUTPUT](#github_output-1)
 - [Summary](#summary)
-- [Custom Actions](#custom-actions)
+- [Custom Actions](#custom-actions) - [File structure](#file-structure) - [action.yml — Action metadata file](#actionyml--action-metadata-file)
 
 ## Default variables (== default environment variables)
 
@@ -259,7 +259,8 @@ jobs:
 
 https://docs.github.com/en/actions/concepts/workflows-and-actions/custom-actions#types-of-actions
 
-- You can build Docker container, JavaScript, and composite actions. Actions require a metadata file to define the inputs, outputs, and runs configuration for your action. Action metadata files use YAML syntax, and the metadata filename must be either action.yml or action.yaml. The preferred format is action.yml.
+- Docker container, JavaScript, and composite actions.
+- the inputs, outputs, and runs configuration in action.yml.
 
 ```yaml
 # 1️⃣ JavaScript Action
@@ -314,4 +315,24 @@ outputs:
 runs:
   using: 'node20'
   main: 'index.js'
+```
+
+```yaml
+name: JavaScript Action Demo
+on: [push]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run my custom action
+        id: greet
+        uses: ./my-action
+        with:
+          who-to-greet: 'Hiroko'
+
+      - name: Print the output
+        run: echo "Greeted at ${{ steps.greet.outputs.greeting-time }}"
 ```
