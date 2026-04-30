@@ -6,6 +6,8 @@
 - [Q84: Which keyword allows you to define environment variables in a GitHub Actions workflow?](#q84-which-keyword-allows-you-to-define-environment-variables-in-a-github-actions-workflow)
 - [Q61: Which of the following are default environment variables in GitHub Actions? (Select three.)](#q61-which-of-the-following-are-default-environment-variables-in-github-actions-select-three)
 - [$GITHUB_OUTPUT](#github_output)
+- [$GITHUB_ENV](#github_env)
+- [$GITHUB_OUTPUT](#github_output-1)
 - [Summary](#summary)
 
 ## Default variables (== default environment variables)
@@ -189,6 +191,57 @@ jobs:
 
 - Passing information between jobs
   https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/pass-job-outputs?versionId=free-pro-team%40latest&productId=actions&restPage=reference%2Cworkflows-and-actions%2Cvariables
+
+## $GITHUB_ENV
+
+- https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#setting-an-environment-variable
+
+- `echo "VAR=value" >> $GITHUB_ENV` to pass variables to later steps.
+- subsequent steps only, not the current step.
+
+| Method                     | Scope                               |
+| -------------------------- | ----------------------------------- |
+| `$GITHUB_ENV`              | Current job only (subsequent steps) |
+| `$GITHUB_OUTPUT` + `needs` | Across jobs (within same workflow)  |
+| Artifacts                  | Across jobs and workflows           |
+
+```yaml
+name: GITHUB_ENV Demo
+on: workflow_dispatch
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set variable
+        run: echo "MY_COLOR=blue" >> $GITHUB_ENV
+
+      - name: Use variable
+        run: echo "The color is $MY_COLOR" # prints: The color is blue
+```
+
+## $GITHUB_OUTPUT
+
+```yaml
+name: GITHUB_OUTPUT Demo
+on: workflow_dispatch
+
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - id: set-color
+        run: echo "MY_COLOR=blue" >> $GITHUB_OUTPUT # write to output
+
+      - name: Use it
+        run: echo "Color is ${{ steps.set-color.outputs.MY_COLOR }}" # prints: blue
+```
+
+|                            | `$GITHUB_ENV`                   | `$GITHUB_OUTPUT`                          |
+| -------------------------- | ------------------------------- | ----------------------------------------- |
+| **Syntax to read**         | `$MY_COLOR`                     | `${{ steps.set-color.outputs.MY_COLOR }}` |
+| **Scope**                  | All subsequent steps in the job | All subsequent steps in the job           |
+| **Can share across jobs?** | ❌                              | ✅ (with `outputs:` block + `needs`)      |
 
 ## Summary
 
