@@ -1,0 +1,16 @@
+name: 'Say Hello'
+description: 'A simple action that greets a user'
+
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+
+outputs:
+  greeting-time:
+    description: 'The time the greeting was made'
+
+runs:
+  using: 'node20'
+  main: 'index.js'

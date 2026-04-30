@@ -9,6 +9,7 @@
 - [$GITHUB_ENV](#github_env)
 - [$GITHUB_OUTPUT](#github_output-1)
 - [Summary](#summary)
+- [Custom Actions](#custom-actions)
 
 ## Default variables (== default environment variables)
 
@@ -253,3 +254,64 @@ jobs:
 | **Default variable**              | `GITHUB_SHA`            | Auto-set by GitHub               | `$GITHUB_SHA` or `${{ github.sha }}` |
 | **GITHUB_TOKEN**                  | `GITHUB_TOKEN`          | Auto-generated per workflow run  | `${{ secrets.GITHUB_TOKEN }}`        |
 | **Repository secret** (`secrets`) | `FIREBASE_API_KEY`      | Settings UI → Repository secrets | `${{ secrets.FIREBASE_API_KEY }}`    |
+
+## Custom Actions
+
+https://docs.github.com/en/actions/concepts/workflows-and-actions/custom-actions#types-of-actions
+
+- You can build Docker container, JavaScript, and composite actions. Actions require a metadata file to define the inputs, outputs, and runs configuration for your action. Action metadata files use YAML syntax, and the metadata filename must be either action.yml or action.yaml. The preferred format is action.yml.
+
+```yaml
+# 1️⃣ JavaScript Action
+runs:
+  using: 'node20'
+  main: 'index.js'
+
+# 2️⃣ Docker Action
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
+  post-entrypoint: 'cleanup.sh'  # cleanup
+
+# 3️⃣ Composite Action
+runs:
+  using: 'composite'
+  steps:
+    - run: echo "Hello"
+```
+
+| Type       | Runtime    | Cleanup keyword    | Use case                 |
+| ---------- | ---------- | ------------------ | ------------------------ |
+| JavaScript | Node.js    | `post:`            | API logic, tools         |
+| Docker     | Container  | `post-entrypoint:` | Full environment control |
+| Composite  | YAML steps | N/A                | Reusable step grouping   |
+
+#### File structure
+
+```
+my-action/
+  action.yml
+  index.js
+```
+
+#### action.yml — Action metadata file
+
+```yaml
+name: 'Say Hello'
+description: 'A simple action that greets a user'
+
+inputs:
+  who-to-greet:
+    description: 'Who to greet'
+    required: true
+    default: 'World'
+
+outputs:
+  greeting-time:
+    description: 'The time the greeting was made'
+
+runs:
+  using: 'node20'
+  main: 'index.js'
+```

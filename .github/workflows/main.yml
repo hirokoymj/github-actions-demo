@@ -1,0 +1,18 @@
+# .github/workflows/main.yml
+name: JavaScript Action Demo
+on: [push]
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run my custom action
+        id: greet
+        uses: ./my-action
+        with:
+          who-to-greet: 'Hiroko'
+
+      - name: Print the output
+        run: echo "Greeted at ${{ steps.greet.outputs.greeting-time }}"
