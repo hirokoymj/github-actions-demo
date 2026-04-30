@@ -143,5 +143,5 @@ inputs:
 
 ## One-line memory trick
 
-> **Reusable workflow = a whole new job** (own runner, own secrets, called at job level)
-> **Composite action = just a reusable set of steps** (no own runner, no secrets, called at step level)
+- **Reusable workflow = a whole new job** (own runner, own secrets, called at job level)
+- **Composite action = just a reusable set of steps** (no own runner, no secrets, called at step level)
