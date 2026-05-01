@@ -11,25 +11,25 @@
 
 # Q4: Which of the following are true regarding workflow-level vs. job-level outputs blocks?
 
-- A workflow-level outputs block should only be used in reusable workflows, not caller workflows.` ✅
-- A reusable workflow can have both workflow-level and job-level outputs blocks.` ✅
-- A job-level outputs block must have the following structure:❌
+1. A workflow-level outputs block should only be used in reusable workflows, not caller workflows. ✅
+2. A reusable workflow can have both workflow-level and job-level outputs blocks. ✅
+3. A job-level outputs block must have the following structure: ❌
 
-```yaml
-outputs:
-    <output-name>
-        value: ${{ steps.<step-name>.outputs.<output-name> }}
-```
+   ```yaml
+   outputs:
+   	<output-name>
+   		value: ${{ steps.<step-name>.outputs.<output-name> }}
+   ```
 
-- A workflow-level outputs block must have the following structure:` ✅
+4. A workflow-level outputs block must have the following structure: ✅
 
-```yaml
-outputs:
-    <output-name>
-        value: ${{ jobs.<job-name>.outputs.<output-name> }}
-```
+   ```yaml
+   outputs:
+   	<output-name>
+   		value: ${{ jobs.<job-name>.outputs.<output-name> }}
+   ```
 
-- Job-level outputs blocks should only be used in caller workflows, not reusable workflows.❌
+5. Job-level outputs blocks should only be used in caller workflows, not reusable workflows. ❌❌
 
 ✅ Correct Answers:
 
