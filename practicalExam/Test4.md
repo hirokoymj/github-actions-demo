@@ -10,6 +10,9 @@
     - [Why your answer was wrong](#why-your-answer-was-wrong)
   - [Question 69: Who can bypass configured deployment protection rules to force deployment (by default)?](#question-69-who-can-bypass-configured-deployment-protection-rules-to-force-deployment-by-default)
     - [Permission levels in GitHub](#permission-levels-in-github)
+  - [Question 25](#question-25)
+  - [You got this one right! ✅](#you-got-this-one-right-)
+  - [Why this matters](#why-this-matters)
 
 ## Summary
 
@@ -154,3 +157,62 @@ Read → Write → Maintain → Admin
                     only this level can bypass
                     deployment protection rules
 ```
+
+Here is the extracted text from the image:
+
+---
+
+## Question 25
+
+In a workflow that has multiple jobs, all running on GitHub-hosted runners, is it true that all jobs are guaranteed to run on the same runner machine?
+
+- Only if they run in parallel
+- Only if they use the same `runs-on` label
+- Yes
+- ✅ No
+
+---
+
+## You got this one right! ✅
+
+- Each job gets its own **fresh, isolated runner machine** — even if they use the same `runs-on` label.
+
+```yaml
+jobs:
+  job1:
+    runs-on: ubuntu-latest # ← gets Machine A (fresh)
+    steps:
+      - run: echo "I am job1"
+
+  job2:
+    runs-on: ubuntu-latest # ← gets Machine B (different fresh machine)
+    steps:
+      - run: echo "I am job2"
+```
+
+## Why this matters
+
+Because each job runs on a **different machine**, files created in one job are **not available** in the next job. This is why you need `actions/upload-artifact` and `actions/download-artifact` to share files between jobs.
+
+```yaml
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hello" > file.txt
+      - uses: actions/upload-artifact@v4 # ← must upload to share
+        with:
+          name: my-file
+          path: file.txt
+
+  job2:
+    runs-on: ubuntu-latest
+    needs: job1
+    steps:
+      - uses: actions/download-artifact@v4 # ← must download on new machine
+        with:
+          name: my-file
+      - run: cat file.txt
+```
+
+Each GitHub-hosted runner is a **clean VM provisioned fresh** for each job, then discarded when the job finishes.

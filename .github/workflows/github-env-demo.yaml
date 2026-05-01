@@ -6,10 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set environment variable
-        run: |
-          echo "MY_NAME=Hiroko" >> $GITHUB_ENV
-          echo "MY_LASTNAME=Yamaji" >> $GITHUB_ENV
+        run: echo "MY_NAME=Hiroko" >> $GITHUB_ENV
 
       - name: Use environment variable
+        env:
+          SAFE_NAME: ${{ env.MY_NAME }} # ← map expression to step-level env var
         run: |
-          echo "Hello $MY_NAME $MY_LASTNAME"
+          echo "Hello $MY_NAME"           # ✅ direct shell var (safe)
+          echo "Hello $SAFE_NAME"         # ✅ mapped through env: (safe)
