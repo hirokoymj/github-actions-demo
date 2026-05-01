@@ -1,34 +1,61 @@
+- [Summary](#summary)
 - [Question 1](#question-1)
-	- [❌ Incorrect](#-incorrect)
 	- [What went wrong](#what-went-wrong)
 	- [The 3 valid scopes](#the-3-valid-scopes)
-- [Question 5](#question-5)
-	- [What went wrong](#what-went-wrong-1)
+- [Question 5: What's true about default variables?](#question-5-whats-true-about-default-variables)
 	- [The key distinction — which context to use](#the-key-distinction--which-context-to-use)
 	- [1. Defined in the workflow file](#1-defined-in-the-workflow-file)
 	- [2. Defined in GitHub UI (Settings → Secrets and variables → Actions → Variables)](#2-defined-in-github-ui-settings--secrets-and-variables--actions--variables)
 	- [Important distinction — `env` vs `vars` context](#important-distinction--env-vs-vars-context)
 - [Question 8: **You can use `permissions` to modify the `GITHUB_TOKEN` permissions on:**](#question-8-you-can-use-permissions-to-modify-the-github_token-permissions-on)
-	- [What went wrong](#what-went-wrong-2)
 	- [Simple code example](#simple-code-example)
 	- [Why step level doesn't exist](#why-step-level-doesnt-exist)
 - [Question 9](#question-9)
-	- [What went wrong](#what-went-wrong-3)
 	- [Why `needs.job1.outputs.output1` is correct](#why-needsjob1outputsoutput1-is-correct)
 	- [Why the others are wrong](#why-the-others-are-wrong)
+
+# Summary
+
+```
+# Custom variables Scope - WF/job/step
+- env
+- jobs.<job_id>.env
+- jobs.<job_id>.steps[*].env
+- env is inside WF.`${{ env.MY_VAR }}`
+- env == CUSTOM variables only
+
+# env vs vars
+- GitHub UI → Settings → Variables - `${{ vars.MY_VAR }}`
+- GitHub UI → Settings → Secrets - `${{ secrets.MY_SECRET }}`
+
+# permissions
+- scope = WF/Job
+
+# a dependent job reference = to reference another job's output.
+- needs `needs.<job-id>.outputs.<output-name>`
+```
 
 # Question 1
 
 What are the scopes defined for custom variables in a workflow?
 
+- **All the jobs within a workflow, by using `jobs.env`**
+- **The entire workflow, by using `env` at the top level of the workflow file**
+- A specific environment in the repository, by using `environment.<environment_id>.env` at the top level of the workflow file
+- **A specific step within a job, by using `jobs.<job_id>.steps[*].env`**
+- **The contents of a job within a workflow, by using `jobs.<job_id>.env`**
+- The entire workflow, by using `custom.env` at the top level of the workflow file
+
+✅ Correct Answers:
+
+```
 - ❌**All the jobs within a workflow, by using `jobs.env`**
 - ✅ **The entire workflow, by using `env` at the top level of the workflow file**
 - A specific environment in the repository, by using `environment.<environment_id>.env` at the top level of the workflow file
 - ✅ **A specific step within a job, by using `jobs.<job_id>.steps[*].env`**
 - ✅ **The contents of a job within a workflow, by using `jobs.<job_id>.env`**
 - The entire workflow, by using `custom.env` at the top level of the workflow file
-
-## ❌ Incorrect
+```
 
 ## What went wrong
 
@@ -62,28 +89,29 @@ jobs:
         run: echo $VAR
 ```
 
-Here is the extracted text from the image:
-
 ---
 
-# Question 5
+# Question 5: What's true about default variables?
 
-What's true about default variables?
+- Currently, the value of the default CI environment variable can be overwritten, but it's not guaranteed this will always be possible
+- Default environment variables always have the prefix "GITHUB\_"
+- You can add a new default environment variable adding the prefix "GITHUB\_" to it
+- **Most of the default environment variables have a corresponding context property**
+- **Default environment variables are set by GitHub and not defined in a workflow**
+- **Default environment variables can be accessed using the env context** - "env" context is for CUSTOM variables only
 
+✅ Correct Answers:
+
+```
 - ✅ Currently, the value of the default CI environment variable can be overwritten, but it's not guaranteed this will always be possible
 - Default environment variables always have the prefix "GITHUB\_"
 - You can add a new default environment variable adding the prefix "GITHUB\_" to it
 - ✅ **Most of the default environment variables have a corresponding context property**
 - ✅ **Default environment variables are set by GitHub and not defined in a workflow**
 - ❌**Default environment variables can be accessed using the env context** - "env" context is for CUSTOM variables only
+```
 
-❌ Incorrect
-
----
-
-## What went wrong
-
-You selected "accessed using the **env context**" — but this is **wrong**. You also missed the first correct answer.
+- You selected "accessed using the **env context**" — but this is **wrong**. You also missed the first correct answer.
 
 | Option                                   | Correct? | Reason                    |
 | ---------------------------------------- | -------- | ------------------------- |
@@ -151,17 +179,19 @@ So if your variable is set in **GitHub Settings UI**, you actually use the `vars
 
 # Question 8: **You can use `permissions` to modify the `GITHUB_TOKEN` permissions on:**
 
+- **Job level**
+- **Step level**
+- **Workflow level**
+
+✅ Correct Answers:
+
+```
 - ✅ **Job level**
 - ❌❌**Step level**
 - ✅ **Workflow level**
+```
 
-❌ Incorrect
-
----
-
-## What went wrong
-
-`permissions` can only be set at **workflow level** and **job level** — **not step level**.
+- `permissions` can only be set at **workflow level** and **job level** — **not step level**.
 
 ## Simple code example
 
@@ -202,16 +232,17 @@ How should a dependent job reference the `output1` value produced by a job named
 
 - `${{depends.job1.output1}}`
 - `${{needs.job1.output1}}`
+- `${{needs.job1.outputs.output1}}`
+- `${{job1.outputs.output1}}`
+
+✅ Correct Answers:
+
+```
+- `${{depends.job1.output1}}`
+- `${{needs.job1.output1}}`
 - ✅ `${{needs.job1.outputs.output1}}`
 - ❌❌`${{job1.outputs.output1}}`
-
-❌ Incorrect
-
----
-
-## What went wrong
-
-You used `job1.outputs.output1` — missing the required `needs.` prefix.
+```
 
 ## Why `needs.job1.outputs.output1` is correct
 
