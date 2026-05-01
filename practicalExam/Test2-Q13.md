@@ -1,41 +1,38 @@
-- [Question 13](#question-13)
-  - [✅ Correct Answers:](#-correct-answers)
-  - [Why your answer is wrong](#why-your-answer-is-wrong)
-- [Question 17](#question-17)
-  - [✅ Correct Answers:](#-correct-answers-1)
-  - [Why your answer is wrong](#why-your-answer-is-wrong-1)
-- [Question 64](#question-64)
-  - [Why your answer is wrong](#why-your-answer-is-wrong-2)
-  - [Question 27](#question-27)
-  - [Why `echo "::debug::Watch out here!"` is correct](#why-echo-debugwatch-out-here-is-correct)
-  - [Why the others are wrong](#why-the-others-are-wrong)
-  - [Other workflow commands using the same pattern](#other-workflow-commands-using-the-same-pattern)
-  - [Question 35](#question-35)
-  - [You got this one right! ✅](#you-got-this-one-right-)
-  - [Question 56](#question-56)
-  - [You got this one right! ✅](#you-got-this-one-right--1)
-  - [Why the others are wrong](#why-the-others-are-wrong-1)
-  - [Where to set it in GitHub](#where-to-set-it-in-github)
-  - [Question 58](#question-58)
-  - [You selected the correct answer! ✅](#you-selected-the-correct-answer-)
-  - [Quick billing summary](#quick-billing-summary)
-  - [Question 66](#question-66)
-  - [You got this one right! ✅](#you-got-this-one-right--2)
-  - [Why the others are wrong](#why-the-others-are-wrong-2)
-  - [Correct usage in a full workflow](#correct-usage-in-a-full-workflow)
-  - [Question 70](#question-70)
-  - [Why all 3 are needed — the full flow](#why-all-3-are-needed--the-full-flow)
+# Test 2
 
-# Question 13
+- [Test 2](#test-2)
+	- [Question 13: To access an artifact that was created in another, previously triggered workflow run you can:](#question-13-to-access-an-artifact-that-was-created-in-another-previously-triggered-workflow-run-you-can)
+		- [Why your answer is wrong](#why-your-answer-is-wrong)
+	- [Question 17: Is this statement true? Workflows can be reused, but a reusable workflow cannot call another reusable workflow.](#question-17-is-this-statement-true-workflows-can-be-reused-but-a-reusable-workflow-cannot-call-another-reusable-workflow)
+	- [Question 64: What components can be reused within a GitHub Organization?](#question-64-what-components-can-be-reused-within-a-github-organization)
+		- [Why your answer is wrong](#why-your-answer-is-wrong-1)
+	- [Question 27: Which is a correct way to print a debug message?](#question-27-which-is-a-correct-way-to-print-a-debug-message)
+		- [Why `echo "::debug::Watch out here!"` is correct](#why-echo-debugwatch-out-here-is-correct)
+		- [Why the others are wrong](#why-the-others-are-wrong)
+		- [Other workflow commands using the same pattern](#other-workflow-commands-using-the-same-pattern)
+	- [Question 35: Which of the following is a correct statement about GitHub Workflows and Actions?](#question-35-which-of-the-following-is-a-correct-statement-about-github-workflows-and-actions)
+		- [You got this one right! ✅](#you-got-this-one-right-)
+	- [Question 56: How can you require manual approvals by a maintainer if the workflow run is targeting the `production` environment?](#question-56-how-can-you-require-manual-approvals-by-a-maintainer-if-the-workflow-run-is-targeting-the-production-environment)
+		- [Why the others are wrong](#why-the-others-are-wrong-1)
+		- [Where to set it in GitHub](#where-to-set-it-in-github)
+	- [Question 58: Are GitHub Actions free for public repositories?](#question-58-are-github-actions-free-for-public-repositories)
+		- [You selected the correct answer! ✅](#you-selected-the-correct-answer-)
+		- [Quick billing summary](#quick-billing-summary)
+	- [Question 66: In a GitHub Actions workflow, how do you specify a specific version of Node.js to use in a job?](#question-66-in-a-github-actions-workflow-how-do-you-specify-a-specific-version-of-nodejs-to-use-in-a-job)
+		- [Why the others are wrong](#why-the-others-are-wrong-2)
+		- [Correct usage in a full workflow](#correct-usage-in-a-full-workflow)
+	- [Question 70: A reusable workflow named `build` creates zip file artifacts. How do you pass the zip file location to the caller workflow that is calling the `build` workflow?](#question-70-a-reusable-workflow-named-build-creates-zip-file-artifacts-how-do-you-pass-the-zip-file-location-to-the-caller-workflow-that-is-calling-the-build-workflow)
+		- [Why all 3 are needed — the full flow](#why-all-3-are-needed--the-full-flow)
+	- [Summary (draft)](#summary-draft)
 
-To access an artifact that was created in another, previously triggered workflow run you can:
+## Question 13: To access an artifact that was created in another, previously triggered workflow run you can:
 
 - You cannot access artifacts that were created in a different workflow run
 - Use the actions/upload-artifact action.
-- ❌ Use the actions/download-artifact action and make sure the artifact is not expired
-- ✅ Use the actions/download-artifact action with elevated permissions.
+- Use the actions/download-artifact action and make sure the artifact is not expired
+- Use the actions/download-artifact action with elevated permissions.
 
-## ✅ Correct Answers:
+✅ Correct Answers:
 
 ```
 - You cannot access artifacts that were created in a different workflow run
@@ -44,7 +41,7 @@ To access an artifact that was created in another, previously triggered workflow
 - ✅ Use the actions/download-artifact action with elevated permissions.
 ```
 
-## Why your answer is wrong
+### Why your answer is wrong
 
 The correct answer is **"with elevated permissions"** — not just "make sure it is not expired."
 
@@ -71,50 +68,48 @@ The "not expired" part is a real concern (artifacts expire after 90 days by defa
 
 ---
 
-# Question 17
+## Question 17: Is this statement true? Workflows can be reused, but a reusable workflow cannot call another reusable workflow.
 
-Is this statement true? Workflows can be reused, but a reusable workflow cannot call another reusable workflow.
+- False
+- True
 
+✅ Correct Answers:
+
+```
 - ✅ False
 - ❌ True
+```
 
-## ✅ Correct Answers:
-
-- ✅ False
-- True ← YOUR ANSWER
-
-## Why your answer is wrong
-
-The statement is False — a reusable workflow can call another reusable workflow. Nesting is allowed.
+- The statement is False — a reusable workflow can call another reusable workflow. Nesting is allowed.
 
 ---
 
-Here is the extracted text from the image:
-
----
-
-# Question 64
-
-What components can be reused within a GitHub Organization?
+## Question 64: What components can be reused within a GitHub Organization?
 
 - Artifacts
-  → Artifacts are used to preserve data after a job has completed and/or share that data with another job within the same workflow.
+- Environment Variables
+- Configuration Variables
+- Workflow Templates
+- Self Hosted Runners
+- Cache
+- Secrets
 
-- Environment Variables❌
-  → Environment variables can be scoped to a step, job or a workflow. They cannot be shared across workflows/repositories or organizations
+✅ Correct Answers:
 
+```
+- Artifacts
+- ❌❌❌Environment Variables - inside WF
 - ✅ Configuration Variables
 - ✅ Workflow Templates
 - ✅ Self Hosted Runners
-- Cache❌
-  → Cache can be reused across workflows within one repository
+- ❌Cache
 - ✅ Secrets
+```
 
-❌ Incorrect
+- environment Variables❌ - inside WF
+- Environment variables are defined inside the workflow YAML file itself — they have no concept of org-level sharing.
 
----
-
-## Why your answer is wrong
+### Why your answer is wrong
 
 You selected **Environment Variables** but that is incorrect. The correct answers are **Configuration Variables, Workflow Templates, Self Hosted Runners, and Secrets**.
 
@@ -124,24 +119,25 @@ You selected **Environment Variables** but that is incorrect. The correct answer
 | Environment Variables | Step / Job / Workflow | ❌                   |
 | Cache                 | Same repository only  | ❌                   |
 
-Environment variables are defined inside the workflow YAML file itself — they have no concept of org-level sharing.
-
-Here is the extracted text from the image:
-
 ---
 
-## Question 27
-
-Which is a correct way to print a debug message?
+## Question 27: Which is a correct way to print a debug message?
 
 - `echo "::debug::message=Watch out here!"`
 - `echo "Watch out here!" >> $GITHUB_DEBUG`
 - `echo ":debug:Watch out here!"`
+- `echo "::debug::Watch out here!"`
+
+✅ Correct Answers:
+
+```
+- `echo "::debug::message=Watch out here!"`
+- `echo "Watch out here!" >> $GITHUB_DEBUG`
+- `echo ":debug:Watch out here!"`
 - ✅ `echo "::debug::Watch out here!"` ← YOUR ANSWER
+```
 
----
-
-## Why `echo "::debug::Watch out here!"` is correct
+### Why `echo "::debug::Watch out here!"` is correct
 
 GitHub Actions uses **workflow commands** with the syntax `::command::message`. Debug is one of these built-in commands.
 
@@ -151,7 +147,7 @@ steps:
     run: echo "::debug::Watch out here!"
 ```
 
-## Why the others are wrong
+### Why the others are wrong
 
 | Option                                    | Why wrong                                                                    |
 | ----------------------------------------- | ---------------------------------------------------------------------------- |
@@ -159,7 +155,7 @@ steps:
 | `echo "Watch out here!" >> $GITHUB_DEBUG` | `$GITHUB_DEBUG` is not a real variable in GitHub Actions                     |
 | `echo ":debug:Watch out here!"`           | Single colons `:debug:` is wrong — must be double colons `::debug::`         |
 
-## Other workflow commands using the same pattern
+### Other workflow commands using the same pattern
 
 ```bash
 echo "::debug::This is a debug message"
@@ -170,13 +166,9 @@ echo "::error::This is an error"
 
 > **Note:** Debug messages only appear in the logs when **debug logging is enabled** — set the secret `ACTIONS_STEP_DEBUG` to `true` in your repository.
 
-Here is the extracted text from the image:
-
 ---
 
-## Question 35
-
-Which of the following is a correct statement about GitHub Workflows and Actions?
+## Question 35: Which of the following is a correct statement about GitHub Workflows and Actions?
 
 - Each action is composed of one or more workflows which is composed of one or more jobs, and each job is composed of one or more steps
 
@@ -186,9 +178,7 @@ Which of the following is a correct statement about GitHub Workflows and Actions
 
 - Each workflow is composed of one or more actions which is composed of one or more jobs, and each job is composed of one or more steps
 
----
-
-## You got this one right! ✅
+### You got this one right! ✅
 
 The correct hierarchy is:
 
@@ -214,24 +204,16 @@ jobs:
 
 ---
 
-Here is the extracted text from the image:
-
----
-
-## Question 56
-
-How can you require manual approvals by a maintainer if the workflow run is targeting the `production` environment?
+## Question 56: How can you require manual approvals by a maintainer if the workflow run is targeting the `production` environment?
 
 - Using branch protection rules
 - ✅ **Using deployment protection rules** ← YOUR ANSWER
 - Setting the required reviewers in the `production` workflow
 - Manual approvals are not supported by GitHub Actions
 
----
+✅ Correct Answers:
 
-## You got this one right! ✅
-
-**Deployment protection rules** are configured in **GitHub → Settings → Environments → production** — not in the workflow file itself.
+- **Deployment protection rules** are configured in **GitHub → Settings → Environments → production** — not in the workflow file itself.
 
 ```yaml
 # workflow file — just references the environment
@@ -243,15 +225,15 @@ jobs:
       - run: echo "Deploying to production..."
 ```
 
-The manual approval happens **before this job runs**, enforced by the protection rule set up in Settings.
+- The manual approval happens **before this job runs**, enforced by the protection rule set up in Settings.
 
-## Why the others are wrong
+### Why the others are wrong
 
 | Option                  | Why wrong                                                                       |
 | ----------------------- | ------------------------------------------------------------------------------- |
 | Branch protection rules | These protect branches from direct pushes/merges — not for deployment approvals |
 
-## Where to set it in GitHub
+### Where to set it in GitHub
 
 ```
 GitHub Repo
@@ -263,13 +245,7 @@ GitHub Repo
 
 ---
 
-Here is the extracted text from the image:
-
----
-
-## Question 58
-
-Are GitHub Actions free for public repositories?
+## Question 58: Are GitHub Actions free for public repositories?
 
 - Yes, but only for the first 2,000 minutes per month
 - ✅ **Yes, when using standard GitHub-hosted runners** ← YOUR ANSWER
@@ -278,11 +254,11 @@ Are GitHub Actions free for public repositories?
 
 ---
 
-## You selected the correct answer! ✅
+### You selected the correct answer! ✅
 
 GitHub Actions is **completely free** for public repositories when using **standard GitHub-hosted runners** (ubuntu, windows, macos) — with **no minute limits**.
 
-## Quick billing summary
+### Quick billing summary
 
 | Repository                  | Standard Runners           | Self-Hosted Runners |
 | --------------------------- | -------------------------- | ------------------- |
@@ -294,13 +270,7 @@ The key distinction: minute limits only apply to **private repositories**.
 
 ---
 
-Here is the extracted text from the image:
-
----
-
-## Question 66
-
-In a GitHub Actions workflow, how do you specify a specific version of Node.js to use in a job?
+## Question 66: In a GitHub Actions workflow, how do you specify a specific version of Node.js to use in a job?
 
 - ✅
 
@@ -332,17 +302,15 @@ with:
   node: 20❌
 ```
 
----
+✅ You got this one right!
 
-## You got this one right! ✅
-
-## Why the others are wrong
+### Why the others are wrong
 
 | Option                        | Why wrong                                               |
 | ----------------------------- | ------------------------------------------------------- |
 | `uses: actions/node-setup@v4` | Wrong action name — it's `setup-node`, not `node-setup` |
 
-## Correct usage in a full workflow
+### Correct usage in a full workflow
 
 ```yaml
 jobs:
@@ -361,13 +329,9 @@ jobs:
 
 The action name is `actions/setup-node` and the input key is always `node-version`.
 
-Here is the extracted text from the image:
-
 ---
 
-## Question 70
-
-A reusable workflow named `build` creates zip file artifacts. How do you pass the zip file location to the caller workflow that is calling the `build` workflow?
+## Question 70: A reusable workflow named `build` creates zip file artifacts. How do you pass the zip file location to the caller workflow that is calling the `build` workflow?
 
 - All outputs are automatically passed to the caller workflows
 - **In the `build` workflow you write the output into `$GITHUB_OUTPUT` in one of the steps** ← ✅
@@ -376,7 +340,7 @@ A reusable workflow named `build` creates zip file artifacts. How do you pass th
 
 ---
 
-## Why all 3 are needed — the full flow
+### Why all 3 are needed — the full flow
 
 Passing an output from a reusable workflow requires **3 steps**, each answer maps to one:
 
@@ -415,3 +379,32 @@ jobs:
 ```
 
 The value must flow through all 3 levels: **Step → Job → Workflow**.
+
+## Summary (draft)
+
+```
+# artifacts created another repo
+- uses: actions/download-artifact@v4
+- permissions: actions: read
+# reusable WF - Nesting is allowed
+
+# Reuse components
+Environment Variables ❌❌❌ inside WF (WF/Job/Step)
+
+# workflow commands - `::command::message`
+- echo "::debug::This is a debug message"
+- echo "::error::This is an error"
+
+# Steps: Action (use), Script (run)
+steps:
+      - uses: actions/checkout@v4
+      - run: echo "Hello"
+# Deployment protection rules -> the manual approval happens before this job runs
+# Branch protection rules - push/merge
+# GH action - Free /public repo/GH host runnter
+# Node version
+- uses: actions/setup-node@v4✅
+- with: node-version: 20✅
+# Passing an output from a reusable workflow requires:
+- 3 steps: **Step → Job → Workflow**.
+```
