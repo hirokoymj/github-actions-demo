@@ -1,0 +1,25 @@
+name: Print default variables
+on: workflow_dispatch
+
+jobs:
+  show-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo $GITHUB_ACTOR        # who triggered the run (e.g. "hirokoymj")
+          echo $GITHUB_REPOSITORY   # owner/repo (e.g. "hirokoymj/github-actions-demo")
+          echo $GITHUB_WORKFLOW     # workflow name (e.g. "Print default variables")
+          echo $GITHUB_EVENT_NAME   # event that triggered the run (e.g. "workflow_dispatch")
+          echo $GITHUB_RUN_ID       # unique ID for this run (e.g. "1234567890")
+          echo $GITHUB_RUN_NUMBER   # run count for this workflow (e.g. "5")
+          echo $GITHUB_SHA          # commit SHA that triggered the run
+          echo $GITHUB_REF          # branch or tag ref (e.g. "refs/heads/main")
+          echo $GITHUB_JOB          # current job ID (e.g. "show-variables")
+          echo $GITHUB_WORKSPACE    # default working directory path
+          echo $RUNNER_OS           # OS of the runner (e.g. "Linux")
+          echo $RUNNER_ARCH         # CPU architecture (e.g. "X64")
+          echo $GITHUB_SERVER_URL   # GitHub server URL (e.g. "https://github.com")
+          echo $GITHUB_API_URL      # GitHub API URL (e.g. "https://api.github.com")
+
+# act workflow_dispatch -W .github/workflows/print-default-vars.yml
+

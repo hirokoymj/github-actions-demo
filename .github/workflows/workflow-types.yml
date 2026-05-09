@@ -6,7 +6,7 @@ on:
         description: 'Log level'
         required: true
         default: 'warning'
-        type: choice # 👈 valid types
+        type: choice
         options:
           - info
           - warning
@@ -14,14 +14,14 @@ on:
       print_tags:
         description: 'True to print to STDOUT'
         required: true
-        type: boolean # 👈 valid types
+        type: boolean
       tags:
         description: 'Test scenario tags'
         required: true
-        type: string # 👈 valid types
+        type: string
       environment:
         description: 'Environment to run tests against'
-        type: environment # 👈 valid types
+        type: environment
         required: true
 
 jobs:

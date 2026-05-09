@@ -1,4 +1,4 @@
-name: GITHUB_ENV example
+name: GITHUB_ENV Demo
 on: workflow_dispatch
 
 jobs:

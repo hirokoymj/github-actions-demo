@@ -1,4 +1,4 @@
-name: GITHUB_OUTPUT example
+name: GITHUB_OUTPUT Demo
 on: workflow_dispatch
 
 jobs:

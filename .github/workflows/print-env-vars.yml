@@ -1,4 +1,4 @@
-name: Test Environment Variables
+name: Print Environment Variables
 on: push
 
 jobs:
@@ -15,3 +15,7 @@ jobs:
     steps:
       - name: Print staging API URL
         run: echo ${{ vars.API_URL }} # prints https://api.staging.com
+
+
+# act push -W .github/workflows/print-env-vars.yml --var-file .vars.production
+# act push -W .github/workflows/print-env-vars.yml --var-file .vars.staging

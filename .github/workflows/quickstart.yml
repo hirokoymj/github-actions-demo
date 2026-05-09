@@ -16,3 +16,5 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+# act push -W .github/workflows/quickstart.yml

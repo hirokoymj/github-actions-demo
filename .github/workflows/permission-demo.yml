@@ -1,0 +1,30 @@
+name: Permissions Demo
+
+on:
+  push:
+    branches: [main]
+
+# Workflow-level permissions — applies to ALL jobs by default
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  job-one:
+    runs-on: ubuntu-latest
+    # No permissions block here, so it inherits the workflow-level permissions:
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+  job-two:
+    runs-on: ubuntu-latest
+    # Job-level permissions — completely OVERRIDES the workflow-level block
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment on PR
+        run: echo "I can write to PRs, but not issues or contents"
+
+# act push -W .github/workflows/permission-demo.yml -j job-one
+# act push -W .github/workflows/permission-demo.yml -j job-two

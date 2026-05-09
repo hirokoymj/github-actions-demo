@@ -12,3 +12,6 @@ jobs:
           node-version: '20'
       - run: node --version
       - run: npm --version
+
+# act workflow_dispatch -W .github/workflows/setup-node.yml
+# VM starts → checkout code → install Node.js → run steps → VM destroyed
